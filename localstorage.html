@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label>Mortgage Amount</label>
+        <input type="text" id="amount">
+        <label>Interest Rate % </label>
+        <input type="text" id="interest">
+        <label>Mortgage Period (Years)</label>
+        <input type="text" id="period">
+        <input type="button" value="Submit" id="btn">
+        <input type="button" value="GetLocalStorage" id="localbtn">
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+               <script>
+    $(document).ready(function () {
+    
+        $("#btn").click(function () {
+    
+            var principal = $("#amount").val();
+            var interest = $("#interest").val();
+            var years = $("#period").val();
+            var items = [];
+            var new_value = {}
+
+            if(localStorage.getItem('key'))
+            {
+                new_value = {
+                    "principal":principal,
+                    "interest":interest,
+                    "years":years
+                };
+
+                items = localStorage.getItem('key');
+                items = JSON.parse(items);
+                items.push(new_value);
+                localStorage.setItem('key', JSON.stringify(items));
+            }
+            else
+            {
+                new_value = {
+                    "principal":principal,
+                    "interest":interest,
+                    "years":years
+                };
+
+                items.push(new_value);
+                localStorage.setItem('key', JSON.stringify(items));
+            }
+
+    
+        });
+    });
+    </script>
+</body>
+</html>
